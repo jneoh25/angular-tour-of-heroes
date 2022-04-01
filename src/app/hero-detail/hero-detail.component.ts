@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 
 import { Hero } from '../hero';  
 import { HeroService } from '../hero.service';
+import { catchError, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-hero-detail',
@@ -27,15 +28,6 @@ export class HeroDetailComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.heroService.getHero(id)
       .subscribe(hero => this.hero = hero);
-  }
-
-  add(name: string): void {
-    name = name.trim();
-    if (!name) { return; }
-    this.heroService.addHero({ name } as Hero )
-      .subscribe (hero => {
-        this.hero.push(hero);
-      });
   }
 
   goBack(): void{
